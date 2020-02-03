@@ -1,5 +1,5 @@
-import { getInitialData } from "../utils/api";
-import { receivePlayers } from "./players";
+import { getInitialData, savePlayers } from "../utils/api";
+import { receivePlayers, addPlayers } from "./players";
 import { receiveCards } from "./cards";
 
 export function handleInitialData() {
@@ -10,3 +10,13 @@ export function handleInitialData() {
     dispatch(receiveCards(cards));
   };
 }
+
+export function handleSavePlayers(players){
+  return dispatch => savePlayers(players)
+  .then(players => {
+    dispatch(addPlayers(players))
+  })
+  .catch(error => {
+    console.log("There was an error adding players", error);
+  })
+ }

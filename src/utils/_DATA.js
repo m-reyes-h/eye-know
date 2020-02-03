@@ -10,6 +10,7 @@ let cardCategory = {
   categoryPeople: "people"
 };
 
+
 let players = {
   // user1: {
   //   id: "user1",
@@ -117,7 +118,7 @@ export function _getPlayers() {
 /**
  * Get all the cards from cards DB
  *
- * @return  {object}  
+ * @return  {object}
  */
 export function _getCards() {
   return { ...cards };
@@ -173,14 +174,14 @@ function formatName(name) {
     .replace(/^\w/, c => c.toUpperCase());
 }
 
-function formatPlayer({ name, color }) {
+function formatPlayer({ name, avatar }) {
   const playerID = generatePlayerID(name);
   const playerName = formatName(name);
 
   return {
     id: playerID,
     name: playerName,
-    color,
+    avatar,
     correctAnswers: [],
     failAnswers: {}
   };

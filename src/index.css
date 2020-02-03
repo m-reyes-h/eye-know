@@ -1,13 +1,69 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #3c3c3c;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+.bear {
+  background-image: url("./assets/avatars/bear.svg");
+}
+
+.girl {
+  background-image: url("./assets/avatars/girl.svg");
+}
+
+.girlpop {
+  background-image: url("./assets/avatars/girlpop.svg");
+}
+
+.granma {
+  background-image: url("./assets/avatars/granma.svg");
+}
+
+.kid {
+  background-image: url("./assets/avatars/kid.svg");
+}
+
+.man {
+  background-image: url("./assets/avatars/man.svg");
+}
+
+.woman {
+  background-image: url("./assets/avatars/woman.svg");
+}
+
+.btn {
+  text-transform: uppercase;
+  border-width: 0 0 4px;
+  border-radius: 18px;
+  padding: 13px 32px;
+  letter-spacing: 0.1rem;
+  box-shadow: none;
+  position: relative;
+}
+
+
+
+
+.btn.btn-success,
+.btn.btn-success:hover,
+.btn.btn-success:active,
+.btn.btn-success:focus {
+  background-color: #78c800 !important;
+  border-bottom-color: #58a700 !important;
+  color: white;
+  font-weight: 700;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.btn:active {
+  border-width: 0 0 2px !important;
+  margin-bottom: 2px;
+  top: 2px;
 }

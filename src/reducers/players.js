@@ -1,11 +1,14 @@
-import {RECEIVE_PLAYERS} from '../actions/players'
+import { RECEIVE_PLAYERS, ADD_PLAYERS } from "../actions/players";
 
 export default function players(state = {}, action) {
   switch (action.type) {
     case RECEIVE_PLAYERS:
-      return action.players
+      return action.players;
+
+    case ADD_PLAYERS:
+      return action.players;
 
     default:
-      return state
+      return state;
   }
 }
