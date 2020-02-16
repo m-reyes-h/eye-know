@@ -290,7 +290,9 @@ body {
   height: 56px;
   width: 56px;
   display: inline-block;
-  background-color: var(--color-blue-primary);
+  background-color: var(--color-grayscale-light);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .rating-item {
@@ -319,6 +321,10 @@ body {
 .trivia-question .title {
   font-size: 32px;
   line-height: 40px;
+}
+
+.trivia-question .subtitle {
+  font-size: 19px;
 }
 
 

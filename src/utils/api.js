@@ -1,4 +1,4 @@
-import { _getPlayers, _getCards, _savePlayers } from "./_DATA";
+import { _getPlayers, _getCards, _savePlayers, _nextPlayer } from "./_DATA";
 
 /**
  * Get initial data
@@ -22,5 +22,16 @@ export function getInitialData() {
 export function savePlayers(players) {
   return new Promise(res => {
     res(_savePlayers(players));
+  });
+}
+
+/**
+ * Get next player
+ *
+ * @return  {number}  id of the next player (current player)
+ */
+export function nextPlayer() {
+  return new Promise(res => {
+    res(_nextPlayer());
   });
 }
