@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { handleInitialData } from "./actions/shared";
-import Home from './routes/Home'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./routes/Home";
+import Trivia from "./routes/Trivia";
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());
@@ -9,9 +11,16 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Home />
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/trivia">
+            <Trivia />
+          </Route>
+        </Switch>
+      </Router>
     );
   }
 }

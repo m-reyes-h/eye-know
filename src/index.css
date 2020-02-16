@@ -1,13 +1,12 @@
 body {
   margin: 0;
-  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #3c3c3c;
 }
-
 
 .bear {
   background-image: url("./assets/avatars/bear.svg");
@@ -37,33 +36,315 @@ body {
   background-image: url("./assets/avatars/woman.svg");
 }
 
-.btn {
+/* Structure */
+.button {
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 20px;
+  position: relative;
+  border-radius: var(--border-radius);
+  border: 2px solid transparent;
+  border-bottom-width: 4px;
+  color: var(--color-gray);
+  background: none;
+  cursor: pointer;
+  letter-spacing: 0.8px;
+  min-width: 150px;
+  padding: 12px 16px;
+  text-align: center;
   text-transform: uppercase;
+  vertical-align: middle;
+  display: inline-block;
+  z-index: 0;
+  transition: filter 0.2s, -webkit-filter 0.2s;
+}
+.button:after {
+  border-width: 2px 2px 4px;
+  bottom: -4px;
+  content: "";
+  left: -2px;
+  right: -2px;
+  top: -2px;
+  background-color: var(--color-white);
+  border-color: var(--color-grayscale-light);
+  background-clip: padding-box;
+  border-style: solid;
+  position: absolute;
+  z-index: -1;
+  border-radius: var(--border-radius);
+}
+
+.selection {
+  display: inline-flex;
+  line-height: 1.4;
+  font-size: 19px;
+  position: relative;
+  color: #4b4b4b;
+  border-color: transparent;
+  border-width: 2px 2px 4px;
+  border-style: solid;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-radius: 16px;
+  transition: filter 0.2s, -webkit-filter 0.2s;
+  z-index: 0;
+}
+
+.selection.md {
+  font-size: 17px !important;
+  padding: 10px 13px !important;
+}
+
+.selection:after {
+  background-color: #fff;
+  border-color: #e5e5e5;
+  border-width: 2px 2px 4px;
+  bottom: -4px;
+  content: "";
+  left: -2px;
+  right: -2px;
+  top: -2px;
+  border-radius: 16px;
+  background-clip: padding-box;
+  border-style: solid;
+  position: absolute;
+  z-index: -1;
+}
+
+.selection input[type="selection"],
+.selection input[type="checkbox"] {
+  -webkit-appearance: none;
+  cursor: pointer;
+  opacity: 0;
+  position: absolute;
+  visibility: hidden;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.selection .text {
+  padding-left: 30px;
+  padding-right: 30px;
+  align-items: center;
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+.selection.md .text {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Style */
+.button-success,
+.button-danger {
+  background-color: var(--color-green-secondary);
+  border-top-left-radius: var(--border-radius-lg);
+  border-top-right-radius: var(--border-radius-lg);
   border-width: 0 0 4px;
-  border-radius: 18px;
-  padding: 13px 32px;
-  letter-spacing: 0.1rem;
-  box-shadow: none;
+  padding: 13px 16px;
+  color: var(--color-white);
+}
+.button-success:after,
+.button-danger:after {
+  background-color: var(--color-green-primary);
+  border-color: transparent;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.button-danger {
+  background-color: var(--color-red-secondary);
+}
+
+.button-danger:after {
+  background-color: var(--color-red-primary);
+}
+
+.selection:active,
+.selection.active {
+  color: var(--color-blue-secondary);
+  border-width: 4px 2px 2px;
+}
+
+.selection:active:after,
+.selection.active:after {
+  background-color: var(--color-blue-primary) !important;
+  border-color: var(--color-blue-secondary) !important;
+  border-bottom-width: 2px;
+  bottom: -2px;
+}
+
+/* State */
+.button:hover {
+  filter: brightness(0.9);
+}
+.button:focus {
+  outline: none;
+}
+.button:active {
+  border-width: 4px 2px 2px;
+}
+.button:disabled {
+  background: none;
+  border-width: 4px 0 0;
+  color: var(--color-gray);
+}
+.button:disabled:hover {
+  filter: none !important;
+}
+.button:disabled:after {
+  background: var(--color-grayscale-light);
+  border: 0;
+  bottom: 0;
+}
+
+.button:active:after,
+.button.active:after {
+  border-bottom-width: 2px;
+  bottom: -2px;
+}
+
+.button-success:hover,
+.button-danger:hover {
+  filter: brightness(1.1);
+}
+.button-success:active,
+.button-danger:active {
+  background: none;
+  border-radius: var(--border-radius);
+  border-width: 4px 0 0;
+}
+
+.selection:not(:active):hover,
+.selection:not(.active):hover {
+  border-width: 4px 2px 2px !important;
+}
+
+.selection:not(:active):hover:after,
+.selection:not(.active):hover:after {
+  border-bottom-width: 2px;
+  bottom: -2px !important;
+  background-color: #f7f7f7;
+}
+
+/* Screens Commons */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+  width: 100%;
+  max-width: var(--page-width);
+  margin: auto;
+}
+
+.fix-width {
+  width: 100%;
+  max-width: var(--page-width) !important;
+  margin: auto;
+}
+
+.title {
+  font-weight: 900;
+  font-size: var(--font-title);
+  color: var(--color-grayscale-dark);
+  letter-spacing: 0.8px;
+}
+
+.trivia-content {
+  min-height: 690px;
+  align-items: stretch;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
+
+.trivia-navbar {
+  z-index: 100;
+}
+
+.trivia-navbar .content {
+  height: 80px;
+  margin: auto;
+  max-width: 1080px;
+  position: relative;
+  padding: 0 40px 0;
+}
+
+.player-avatar {
+  border-radius: 50%;
+  height: 56px;
+  width: 56px;
+  display: inline-block;
+  background-color: var(--color-blue-primary);
+}
+
+.rating-item {
+  background-repeat: no-repeat;
+  background-size: 24px;
+  display: flex;
+  height: 45px;
+  margin: auto;
+  width: 24px;
+  margin-right: 0.5rem;
+  background-image: url("./assets//icons/flame-empty.svg");
+}
+
+.rating-item.checked {
+  background-image: url("./assets//icons/flame.svg");
+}
+
+.trivia-question {
+  overflow: auto;
+}
+
+.trivia-question .content {
+  max-width: 600px;
+}
+
+.trivia-question .title {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+
+.trivia-question .question-area .area-image .card-image {
+  object-fit: cover;
+  width: 20vw;
+  height: 33vh;
+  border-radius: 1rem;
+  border: 3px solid var(--color-grayscale-soft);
+  padding: .1rem;
+}
+
+.trivia-question .answer-area {
+  min-height: auto;
+}
+
+.trivia-footer {
+  flex-basis: 140px;
+  z-index: 100;
   position: relative;
 }
 
-
-
-
-.btn.btn-success,
-.btn.btn-success:hover,
-.btn.btn-success:active,
-.btn.btn-success:focus {
-  background-color: #78c800 !important;
-  border-bottom-color: #58a700 !important;
-  color: white;
-  font-weight: 700;
-  box-shadow: none !important;
-  outline: none !important;
-}
-
-.btn:active {
-  border-width: 0 0 2px !important;
-  margin-bottom: 2px;
-  top: 2px;
+.trivia-footer .content {
+  max-width: 100%;
+  border-top: 2px solid var(--color-grayscale-soft);
+  position: absolute;
+  bottom: 0;
+  background-color: var(--color-white);
 }

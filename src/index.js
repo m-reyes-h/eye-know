@@ -4,8 +4,11 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducers from "./reducers/index";
 import middlewares from "./middlewares/index";
-import "bootstrap/dist/css/bootstrap.min.css";
+
+import './assets/styles/reset.css';
+import "./assets/styles/variables.css";
 import "./index.css";
+
 import { composeWithDevTools } from "redux-devtools-extension";
 import App from "./App";
 

@@ -11,12 +11,22 @@ export function handleInitialData() {
   };
 }
 
-export function handleSavePlayers(players){
-  return dispatch => savePlayers(players)
-  .then(players => {
-    dispatch(addPlayers(players))
-  })
-  .catch(error => {
-    console.log("There was an error adding players", error);
-  })
- }
+/**
+ * Set players
+ *
+ * @param   {object}  players
+ *
+ * @return  {Redux action}           once the players are store in the API,
+ *                                   the players will be stored in the Redux state
+ */
+export function handleSavePlayers(players) {
+  return dispatch =>
+    savePlayers(players)
+      .then(players => {
+        // Store in Redux
+        dispatch(addPlayers(players));
+      })
+      .catch(error => {
+        console.log("There was an error adding players", error);
+      });
+}

@@ -1,65 +1,10 @@
-.card_content {
-  display: block;
-  position: relative;
-  padding: 24px;
-  padding-bottom: 12px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  user-select: none;
-  text-align: center;
-  align-items: stretch;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: center;
-  border-width: 2px 2px 4px;
-  font-size: 18px;
-  font-weight: 600;
-  border-radius: 16px;
-}
-
-.selection {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border: 2px solid #e5e5e5;
-  border-width: 2px 2px 4px;
-  display: inline-block;
-  border-radius: 16px;
-  z-index: -1;
-}
-
-.card_content:active {
-  top: 2px;
-}
-
-.card_content:active .selection {
-  border-width: 2px;
-}
-
-.checkbox {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
 .nameBox {
   text-align: center;
   border: 0;
   max-width: 11ch;
   background-color: transparent;
-}
-
-
-.card_content input:checked ~ .selection {
-  background-color: #ddf4ff;
-  border-color: #1cb0f6;
+  color: var(--color-grayscale-dark);
+  font-weight: 600;
 }
 
 .avatar {
