@@ -111,7 +111,7 @@ body {
   z-index: -1;
 }
 
-.selection input[type="selection"],
+.selection input[type="radio"],
 .selection input[type="checkbox"] {
   -webkit-appearance: none;
   cursor: pointer;
@@ -133,6 +133,7 @@ body {
   text-align: center;
   text-overflow: ellipsis;
   white-space: normal;
+  user-select: none;
 }
 
 .selection.md .text {
@@ -181,6 +182,24 @@ body {
 .selection.active:after {
   background-color: var(--color-blue-primary) !important;
   border-color: var(--color-blue-secondary) !important;
+  border-bottom-width: 2px;
+  bottom: -2px;
+}
+
+.selection.disabled {
+  border-width: 4px 2px 2px;
+  color: #e5e5e5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.selection.disabled.active {
+  color: var(--color-blue-secondary);
+}
+
+.selection.disabled:after {
+  border: solid #e5e5e5;
+  border-width: 2px 2px 4px;
   border-bottom-width: 2px;
   bottom: -2px;
 }
@@ -327,14 +346,13 @@ body {
   font-size: 19px;
 }
 
-
 .trivia-question .question-area .area-image .card-image {
   object-fit: cover;
   width: 20vw;
   height: 33vh;
   border-radius: 1rem;
   border: 3px solid var(--color-grayscale-soft);
-  padding: .1rem;
+  padding: 0.1rem;
 }
 
 .trivia-question .answer-area {

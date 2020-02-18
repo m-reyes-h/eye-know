@@ -54,7 +54,7 @@ let cards = {
       text:
         "Johan Sebastian Bach wrote about being inspired by Beethoven's compositions in his memoirs",
       correct: false,
-      choices: [true, false]
+      choices: ["true", "false"]
     }
   },
   r16: {
@@ -81,7 +81,7 @@ let cards = {
       text:
         "The character of Robin Hood was created for the 1938 film, The Adventures of Robin Hood?",
       correct: false,
-      choices: [true, false]
+      choices: ["true", "false"]
     }
   },
   g11: {
@@ -94,8 +94,8 @@ let cards = {
     questionOne: {
       type: questionType.MULTIPLE_CHOICE,
       text: "Animal",
-      correct: "Moose",
-      choices: ["Moose", "Chicken"]
+      correct: "Pato",
+      choices: ["Gallo", "Cerdo"]
     },
     questionTwo: {
       type: questionType.MULTIPLE_CHOICE,
@@ -108,7 +108,7 @@ let cards = {
       type: questionType.TRUE_FALSE,
       text: "European moose are called elk.",
       correct: true,
-      choices: [true, false]
+      choices: ["true", "false"]
     }
   },
   g21: {
@@ -135,7 +135,7 @@ let cards = {
       type: questionType.TRUE_FALSE,
       text: "European moose are called elk.",
       correct: true,
-      choices: [true, false]
+      choices: ["true", "false"]
     }
   },
   g57: {
@@ -162,7 +162,7 @@ let cards = {
       type: questionType.TRUE_FALSE,
       text: "The black widow spider bite is usually deadly to humans.",
       correct: false,
-      choices: [true, false]
+      choices: ["true", "false"]
     }
   },
   r67: {
@@ -193,7 +193,7 @@ let cards = {
       text:
         "Diana has no royal or aristocratic titles before she married Charles, Prince of Wales",
       correct: false,
-      choices: [true, false]
+      choices: ["true", "false"]
     }
   }
 };
@@ -205,20 +205,11 @@ export function _setCurrentPlayer(player) {
   return player;
 }
 
-/**
- * Get all the players from players DB
- *
- * @return  {object}
- */
+
 export function _getPlayers() {
   return { ...players };
 }
 
-/**
- * Get all the cards from cards DB
- *
- * @return  {object}
- */
 export function _getCards() {
   return { ...cards };
 }
@@ -298,11 +289,11 @@ export function _savePlayers(_players) {
   return players;
 }
 
-export function _nextPlayer() {
+export function _nextPlayer(person = currentPlayer) {
   const playersArr = Object.values(players);
 
   var index = playersArr.findIndex(function(person) {
-    return person.name === currentPlayer;
+    return person.id === currentPlayer;
   });
 
   if (playersArr.length === index + 1) {

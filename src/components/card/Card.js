@@ -3,10 +3,10 @@ import Title from "./Title";
 import Question from "./Question";
 import Answers from './Answers'
 
-const Card = ({ card, questionNumber }) => {
+const Card = ({ card, questionNumber, onClick, disabled }) => {
   return (
     <div className="trivia-question d-flex flex-grow-1 flex-column align-items-center justify-content-center">
-      <div className="content d-flex flex-column flex-grow-1">
+      <div className="content d-flex flex-column justify-content-center flex-grow-1">
         {/* Title */}
         <Title questionNumber={questionNumber}>
           {card[questionNumber].text}
@@ -18,7 +18,12 @@ const Card = ({ card, questionNumber }) => {
         )}
 
         {/* Answers */}
-        <Answers card={card} questionNumber={questionNumber} />
+        <Answers
+          disabled={disabled}
+          onClick={(value) => onClick(value)}
+          card={card}
+          questionNumber={questionNumber}
+        />
       </div>
     </div>
   );

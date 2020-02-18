@@ -9,6 +9,27 @@ function* shuffle(array) {
   }
 }
 
+// Optional way without next
+function shuffleArr(array) {
+  var currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
 /**
  * List of players avatars
  */
@@ -74,9 +95,16 @@ export function randomCards(cards) {
   return rdmCards.next().value;
 }
 
-
+/**
+ * get random in correct answers for question one
+ *
+ * @param   {object}  cards           list of cards
+ * @param   {string}  questionNumber  the number of the question
+ * @param   {object}  card            current card
+ *
+ * @return  {array}                  incorrect answers
+ */
 export function randomIncorrectAnswers(cards, questionNumber, card) {
-  console.log(cards, questionNumber, card)
   // cards for the same category without response yet
   // and avoid the same card
   const availableCards = Object.values(cards).filter(
@@ -88,17 +116,20 @@ export function randomIncorrectAnswers(cards, questionNumber, card) {
   );
 
   // get random cards
-  const rdmCards = shuffle(availableCards);
+  let rdmCards = shuffle(availableCards);
   const questionsArr = [];
   const INCORRECT_ANSWERS_COUNT = 4;
 
   for (let i = 0; i < INCORRECT_ANSWERS_COUNT; i++) {
-    questionsArr.push(rdmCards.next());
+    const ia = rdmCards.next();
+    if (!ia.done) questionsArr.push(ia.value[questionNumber].correct);
+    else break;
   }
 
-  console.log(questionsArr);
+  // add the correct answer to the list
+  questionsArr.push(card[questionNumber].correct);
 
-  return questionsArr;
+  return shuffleArr(questionsArr);
 }
 
 /**

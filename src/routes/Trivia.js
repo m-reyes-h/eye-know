@@ -4,10 +4,16 @@ import Card from "../components/card/Card";
 import PlayerAvatar from "../components/players/PlayerAvatar";
 import Rating from "../components/players/Rating";
 import { randomCards } from "../utils/helpers";
+import { withRouter } from "react-router-dom";
 
 class Trivia extends Component {
   state = {
-    card: null
+    card: null,
+    answerSelected: true,
+    questionNumber: "",
+    userAnswer: "",
+    disableForm: false,
+    answerIsCorrect: null
   };
 
   componentDidMount() {
@@ -15,32 +21,62 @@ class Trivia extends Component {
     const card = randomCards(cards);
     this.setState({
       card: cards[card],
-      questionNumber: "questionThree"
+      questionNumber: "questionOne",
+      userAnswer: ""
     });
   }
 
-  // mostrar current user
+  answerSelected = userAnswer => {
+    this.setState(state => ({
+      answerSelected: false,
+      userAnswer
+    }));
+  };
 
-  // next user - logica para obtener el proximo usuario
+  handleSkipQuestion = e => {
+    e.preventDefault();
 
-  // next question - logica para obtener una pregunta radom pasandole un objeto de preguntas
-  // no obtener una pregunta que ya tenga respuesta
+    console.log(this.props);
+    const location = {
+      pathname: "/answer"
+    };
+    this.props.history.replace(location);
+  };
 
-  // permitir escoger de una lista de posibles respuestas
+  handleCheckAnswer = e => {
+    e.preventDefault();
 
-  // si el usuario acepta o falla siempre preguntar los puntos
+    // prevent user to check another question
+    this.setState({
+      disableForm: true
+    });
 
-  // acepta: cuando el usuario acepte, pasar a la siguiente quiz de la misma pregunta
-  // darle puntos al usuario
-
-  // falla: quemar la pregunta como respondida y pasar a la siguiente
+    const { userAnswer, card, questionNumber } = this.state;
+    if (userAnswer === card[questionNumber].correct) {
+      alert("respuesta correcta");
+      this.setState({
+        answerIsCorrect: true
+      })
+    } else {
+      alert("respuesta incorrecta");
+      this.setState({
+        answerIsCorrect: false
+      });
+    }
+  };
 
   render() {
-    const { currentPlayer, cards } = this.props;
-    const { card, questionNumber } = this.state;
+    const { currentPlayer } = this.props;
+    const {
+      card,
+      questionNumber,
+      answerSelected,
+      disableForm,
+      answerIsCorrect
+    } = this.state;
 
     return (
-      <div className="trivia-content">
+      <form className="trivia-content" disabled={disableForm}>
         {/* Header */}
         <nav className="trivia-navbar">
           <div className="content d-flex">
@@ -55,24 +91,43 @@ class Trivia extends Component {
         </nav>
 
         {/* Content */}
-        {card && <Card questionNumber={questionNumber} card={card} />}
+        {card && (
+          <Card
+            disabled={disableForm}
+            questionNumber={questionNumber}
+            onClick={value => this.answerSelected(value)}
+            card={card}
+          />
+        )}
 
         {/* Footer */}
         <footer className="trivia-footer">
-          <div className="content">
-            <div className="d-flex justify-content-between align-items-center h-100 px-5 fix-width">
-              <div className="skip d-flex align-items-center h-100">
-                <button className="button">SKIP</button>
-              </div>
-              <div className="next d-flex align-items-center h-100">
-                <button disabled className="button">
-                  CHECK
-                </button>
+          {/* Qustion controls */}
+          {answerIsCorrect === null && (
+            <div className="content">
+              <div className="d-flex justify-content-between align-items-center h-100 px-5 fix-width">
+                <div className="skip d-flex align-items-center h-100">
+                  <button className="button" onClick={this.handleSkipQuestion}>
+                    SKIP
+                  </button>
+                </div>
+                <div className="next d-flex align-items-center h-100">
+                  <button
+                    onClick={this.handleCheckAnswer}
+                    disabled={answerSelected}
+                    className="button button-success"
+                  >
+                    CHECK
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          )}
+
+          {answerIsCorrect && <div className="content">correcto</div>}
+          {!answerIsCorrect && answerIsCorrect !== null && <div className="content">incorrecto</div>}
         </footer>
-      </div>
+      </form>
     );
   }
 }
@@ -85,4 +140,4 @@ function mapStateToProps({ currentPlayer, players, cards }) {
   };
 }
 
-export default connect(mapStateToProps)(Trivia);
+export default withRouter(connect(mapStateToProps)(Trivia));
