@@ -372,3 +372,46 @@ body {
   bottom: 0;
   background-color: var(--color-white);
 }
+
+.trivia-footer .footer-title {
+  font-size: 24px;
+}
+
+.content-result-learn {
+  max-width: 400px;
+  min-width: 320px;
+}
+
+.bg-incorrect,
+.bg-correct {
+  background-color: var(--bg-red) !important;
+  color: var(--color-red-secondary);
+  border-color: var(--bg-red) !important;
+  height: auto !important;
+}
+
+.bg-correct {
+  background-color: var(--bg-green) !important;
+  color: var(--color-green-secondary);
+  border-color: var(--bg-green) !important;
+}
+
+.circle-correct,
+.circle-incorrect {
+  background: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+  float: left;
+  height: 64px;
+  margin-right: 16px;
+  width: 64px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 2.5rem;
+  background-image: url("./assets/icons/check.svg");
+}
+
+.circle-incorrect {
+  background-image: url("./assets/icons/clear.svg");
+}

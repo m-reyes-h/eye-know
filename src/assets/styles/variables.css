@@ -1,8 +1,8 @@
 :root {
   /* Color palette */
   --color-gray: #afafaf;
-  --color-white: #FFFFFF;
-  --color-grayscale-light: #EEEEEE;
+  --color-white: #ffffff;
+  --color-grayscale-light: #eeeeee;
   --color-grayscale-soft: #e5e5e5;
   --color-grayscale-dark: #3c3c3c;
   --color-green-secondary: #58a700;
@@ -11,6 +11,8 @@
   --color-red-primary: #ff4b4b;
   --color-blue-secondary: #1cb0f6;
   --color-blue-primary: #ddf4ff;
+  --bg-red: #ffc1c1;
+  --bg-green: #b8f28b;
 
   --font-title: 35px;
 
@@ -20,5 +22,4 @@
   /* Border radii */
   --border-radius: 16px;
   --border-radius-lg: 18px;
-
 }

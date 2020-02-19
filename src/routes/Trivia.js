@@ -5,6 +5,7 @@ import PlayerAvatar from "../components/players/PlayerAvatar";
 import Rating from "../components/players/Rating";
 import { randomCards } from "../utils/helpers";
 import { withRouter } from "react-router-dom";
+import Result from "../components/card/Result";
 
 class Trivia extends Component {
   state = {
@@ -15,6 +16,7 @@ class Trivia extends Component {
     disableForm: false,
     answerIsCorrect: null
   };
+
 
   componentDidMount() {
     const { cards } = this.props;
@@ -52,18 +54,33 @@ class Trivia extends Component {
     });
 
     const { userAnswer, card, questionNumber } = this.state;
+    // Correct
     if (userAnswer === card[questionNumber].correct) {
-      alert("respuesta correcta");
       this.setState({
         answerIsCorrect: true
-      })
+      });
     } else {
-      alert("respuesta incorrecta");
+      // Incorrect
       this.setState({
         answerIsCorrect: false
       });
     }
   };
+
+  handleNextStep = (e) => {
+    e.preventDefault();
+    const {answerIsCorrect} = this.state;
+
+    if (answerIsCorrect) {
+      this.setState({
+        questionNumber: "questionTwo",
+        answerSelected: true,
+        userAnswer: "",
+        disableForm: false,
+        answerIsCorrect: null
+      });
+    }
+  }
 
   render() {
     const { currentPlayer } = this.props;
@@ -124,8 +141,23 @@ class Trivia extends Component {
             </div>
           )}
 
-          {answerIsCorrect && <div className="content">correcto</div>}
-          {!answerIsCorrect && answerIsCorrect !== null && <div className="content">incorrecto</div>}
+          {/* Correct */}
+          {answerIsCorrect && (
+            <Result
+              onContinue={this.handleNextStep}
+              correct={card[questionNumber]}
+              type="correct"
+            />
+          )}
+
+          {/* Incorrect */}
+          {!answerIsCorrect && answerIsCorrect !== null && (
+            <Result
+              onContinue={this.handleNextStep}
+              correct={card[questionNumber]}
+              type="incorrect"
+            />
+          )}
         </footer>
       </form>
     );
