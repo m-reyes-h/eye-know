@@ -1,4 +1,10 @@
-import { _getPlayers, _getCards, _savePlayers, _nextPlayer } from "./_DATA";
+import {
+  _getPlayers,
+  _getCards,
+  _savePlayers,
+  _nextPlayer,
+  _saveCardAnswer
+} from "./_DATA";
 
 /**
  * Get initial data
@@ -33,5 +39,21 @@ export function savePlayers(players) {
 export function nextPlayer() {
   return new Promise(res => {
     res(_nextPlayer());
+  });
+}
+
+/**
+ * Save user answer
+ * todo add description
+ *
+ * @param   {[type]}  cid            [cid description]
+ * @param   {[type]}  correctAnswer  [correctAnswer description]
+ * @param   {[type]}  failAnswer     [failAnswer description]
+ *
+ * @return  {[type]}                 [return description]
+ */
+export function saveAnswer({ cid, correctAnswer, failAnswer }) {
+  return new Promise(res => {
+    res(_saveCardAnswer({ cid, correctAnswer, failAnswer }));
   });
 }

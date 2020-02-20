@@ -205,7 +205,6 @@ export function _setCurrentPlayer(player) {
   return player;
 }
 
-
 export function _getPlayers() {
   return { ...players };
 }
@@ -214,6 +213,14 @@ export function _getCards() {
   return { ...cards };
 }
 
+/**
+ * save user response
+ *
+ * @param   {string}  cid            card id
+ * @param   {string}  correctAnswer  card id
+ * @param   {object}  failAnswer     {card question, user response}
+ *
+ */
 export function _saveCardAnswer({ cid, correctAnswer, failAnswer }) {
   try {
     players = {
@@ -228,7 +235,7 @@ export function _saveCardAnswer({ cid, correctAnswer, failAnswer }) {
           failAnswer !== null
             ? {
                 ...players[currentPlayer].failAnswers,
-                [cid]: { [failAnswer.option]: failAnswer.response }
+                [cid]: { [failAnswer.question]: failAnswer.response }
               }
             : { ...players[currentPlayer].failAnswers }
       }
@@ -242,6 +249,8 @@ export function _saveCardAnswer({ cid, correctAnswer, failAnswer }) {
         failPlayer: failAnswer !== null ? currentPlayer : null
       }
     };
+
+    return currentPlayer;
   } catch (error) {
     throw new Error("Error saving card answer.");
   }

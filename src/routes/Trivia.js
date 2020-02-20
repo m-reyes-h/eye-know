@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import Card from "../components/card/Card";
 import PlayerAvatar from "../components/players/PlayerAvatar";
 import Rating from "../components/players/Rating";
-import { randomCards } from "../utils/helpers";
+import { randomCards, nextQuestion } from "../utils/helpers";
 import { withRouter } from "react-router-dom";
 import Result from "../components/card/Result";
+import { handleSaveAnswer } from "../actions/shared";
 
 class Trivia extends Component {
   state = {
@@ -16,7 +17,6 @@ class Trivia extends Component {
     disableForm: false,
     answerIsCorrect: null
   };
-
 
   componentDidMount() {
     const { cards } = this.props;
@@ -38,7 +38,14 @@ class Trivia extends Component {
   handleSkipQuestion = e => {
     e.preventDefault();
 
-    console.log(this.props);
+    const { card, questionNumber } = this.state;
+    this.props.dispatch(
+      handleSaveAnswer(card.id, null, {
+        question: questionNumber,
+        response: "Skip question"
+      })
+    );
+
     const location = {
       pathname: "/answer"
     };
@@ -54,33 +61,67 @@ class Trivia extends Component {
     });
 
     const { userAnswer, card, questionNumber } = this.state;
+
     // Correct
-    if (userAnswer === card[questionNumber].correct) {
+    if (userAnswer === card[questionNumber].correct.toString()) {
       this.setState({
         answerIsCorrect: true
       });
+
+      // last question for the user ans is correct
+      // store data
+      if (questionNumber !== "questionOne") {
+        this.props.dispatch(handleSaveAnswer(card.id, card.id, null));
+      }
     } else {
       // Incorrect
       this.setState({
         answerIsCorrect: false
       });
+
+      // any incorrect question must be stored
+      this.props.dispatch(
+        handleSaveAnswer(card.id, null, {
+          question: questionNumber,
+          response: userAnswer
+        })
+      );
     }
   };
 
-  handleNextStep = (e) => {
+  handleNextStep = e => {
     e.preventDefault();
-    const {answerIsCorrect} = this.state;
+    const { answerIsCorrect, questionNumber } = this.state;
+
+    // Is last question
+    // ...go to next user
+    if (questionNumber !== "questionOne") {
+      const location = {
+        pathname: "/answer"
+      };
+      this.props.history.replace(location);
+    }
+
+    // Next question
+    const question = nextQuestion() === 2 ? "questionTwo" : "questionThree";
 
     if (answerIsCorrect) {
       this.setState({
-        questionNumber: "questionTwo",
+        questionNumber: question,
         answerSelected: true,
         userAnswer: "",
         disableForm: false,
         answerIsCorrect: null
       });
     }
-  }
+
+    if (!answerIsCorrect) {
+      const location = {
+        pathname: "/answer"
+      };
+      this.props.history.replace(location);
+    }
+  };
 
   render() {
     const { currentPlayer } = this.props;

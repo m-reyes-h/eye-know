@@ -31,6 +31,15 @@ function shuffleArr(array) {
 }
 
 /**
+ * Generate next question random
+ *
+ * @return  {integer}  the next question index 2 or 3 (2 possibilities 50% each)
+ */
+export function nextQuestion() {
+  return shuffleArr([2,3])[0];
+}
+
+/**
  * List of players avatars
  */
 const avatar = ["bear", "girl", "girlpop", "granma", "kid", "man", "woman"];

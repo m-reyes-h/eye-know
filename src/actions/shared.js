@@ -1,7 +1,7 @@
-import { getInitialData, savePlayers, nextPlayer } from "../utils/api";
-import { receivePlayers, addPlayers } from "./players";
+import { getInitialData, savePlayers, nextPlayer, saveAnswer } from "../utils/api";
+import { receivePlayers, addPlayers, answerPlayer } from "./players";
 import { setCurrentPlayer } from "./currentPlayer";
-import { receiveCards } from "./cards";
+import { receiveCards, answerCard } from "./cards";
 
 export function handleInitialData() {
   return (dispatch) => {
@@ -48,4 +48,17 @@ export function handleNextPlayer() {
         console.log("There was an error setting current player", error);
       });
   };
+}
+
+export function handleSaveAnswer(cid, correctAnswer, failAnswer) {
+  console.log("miii",  cid, correctAnswer, failAnswer );
+  return dispatch => {
+    saveAnswer({ cid, correctAnswer, failAnswer }).then(currentPlayer => {
+      // Store answer in Redux
+      dispatch(answerCard({ cid, correctAnswer, failAnswer, currentPlayer }));
+      dispatch(answerPlayer({ cid, correctAnswer, failAnswer, currentPlayer }));
+    }).catch(error => {
+      console.log("There was an error setting the card answer", error);
+    });
+  }
 }

@@ -35,7 +35,7 @@ class Home extends Component {
   handleSetPlayers = () => {
     const { dispatch } = this.props;
 
-    // Check minimun numbers of players in the game
+    // Check minimum numbers of players in the game
     const selectedCount = this.state.defaultPlayers.filter(p => p.selected);
     if (selectedCount.length < 2) {
       return alert("Must select at least 2 players");

@@ -7,11 +7,11 @@ import uuid from "uuid";
 class Answers extends Component {
   state = {
     answerOption: "",
-    randomAnswer: ''
+    randomAnswer: ""
   };
 
   radioChangeHandler = event => {
-    const {value} = event.target;
+    const { value } = event.target;
 
     this.setState({
       answerOption: value
@@ -31,7 +31,7 @@ class Answers extends Component {
 
   render() {
     const { questionNumber, card, disabled } = this.props;
-    const {answerOption, randomAnswer} = this.state;
+    const { answerOption, randomAnswer } = this.state;
 
     const possibleAnswer =
       randomAnswer && questionNumber === "questionOne"
@@ -49,17 +49,16 @@ class Answers extends Component {
         <div className={`d-flex justify-content-center w-100 ${orientation}`}>
           {possibleAnswer &&
             possibleAnswer.map(answer => (
-                <Selection
-                  disabled={disabled}
-                  key={uuid()}
-                  size={size}
-                  value={answer}
-                  onChange={this.radioChangeHandler}
-                  isSelected={answerOption === answer}
-                >
-                  {answer}
-                </Selection>
-
+              <Selection
+                disabled={disabled}
+                key={uuid()}
+                size={size}
+                value={answer}
+                onChange={this.radioChangeHandler}
+                isSelected={answerOption === answer}
+              >
+                {answer}
+              </Selection>
             ))}
         </div>
       </div>
