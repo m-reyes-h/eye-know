@@ -11,7 +11,7 @@ const Result = ({ type, correct, onContinue }) => {
         <div className="d-flex align-items-center h-100 content-result-learn">
           <span className={`${ type === "correct" ? "circle-correct" : 'circle-incorrect'} d-flex justify-content-center align-items-center`}></span>
           <div className="d-flex flex-column">
-            <h5 className="footer-title my-1">The correct answer is:</h5>
+            <h5 className="footer-title my-1">Correct solution:</h5>
             <p>
               {correct.correct}
             </p>

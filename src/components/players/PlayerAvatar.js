@@ -1,9 +1,9 @@
 import React from 'react';
 
 const PlayerAvatar = (props) => {
-  const {avatar, name} = props;
+  const {avatar, name, style} = props;
 return (
-  <div title={name} className={`${avatar} player-avatar`}>{props.children}</div>
+  <div style={style} title={name} className={`${avatar} player-avatar`}>{props.children}</div>
 );
 }
 

@@ -60,6 +60,8 @@ const names = [
   "Wally"
 ];
 
+export const numberOfCardsToWin = 5;
+
 /**
  * Generate a player profile
  *

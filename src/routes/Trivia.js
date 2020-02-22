@@ -47,7 +47,11 @@ class Trivia extends Component {
     );
 
     const location = {
-      pathname: "/answer"
+      pathname: "/answer",
+      state: {
+        currentPlayer: this.props.currentPlayer,
+        userSkip: true
+      }
     };
     this.props.history.replace(location);
   };
@@ -97,7 +101,11 @@ class Trivia extends Component {
     // ...go to next user
     if (questionNumber !== "questionOne") {
       const location = {
-        pathname: "/answer"
+        pathname: "/answer",
+        state: {
+          currentPlayer: this.props.currentPlayer,
+          answerIsCorrect: true
+        }
       };
       this.props.history.replace(location);
     }
@@ -117,7 +125,11 @@ class Trivia extends Component {
 
     if (!answerIsCorrect) {
       const location = {
-        pathname: "/answer"
+        pathname: "/answer",
+        state: {
+          currentPlayer: this.props.currentPlayer,
+          answerIsCorrect: false
+        }
       };
       this.props.history.replace(location);
     }
@@ -160,7 +172,7 @@ class Trivia extends Component {
 
         {/* Footer */}
         <footer className="trivia-footer">
-          {/* Qustion controls */}
+          {/* Question controls */}
           {answerIsCorrect === null && (
             <div className="content">
               <div className="d-flex justify-content-between align-items-center h-100 px-5 fix-width">
